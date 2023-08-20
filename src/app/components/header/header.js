@@ -3,10 +3,16 @@ import React, { useState } from 'react';
 import styles from '../../styles/header.module.scss';
 import Image from 'next/image';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useUser } from '@auth0/nextjs-auth0';
 
 const Header = () => {
 
-  const { loginWithRedirect, logout, user } = useAuth0();
+  // const { loginWithRedirect, logout, user } = useAuth0();
+
+  const { user, isLoading, error } = useUser();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
 
   // const [imageError, setImageError] = useState({});
 
@@ -84,11 +90,11 @@ const Header = () => {
         </div>
         <div className={styles.navRight}>
           {!user ? (
-            <button className={styles.transparentBtn} onClick={loginWithRedirect}>Login</button>
+            <button onClick={() => window.location.href = '/api/auth/login'}>Login</button>
           ) : (
             <>
               <span>Welcome, {user.name}!</span>
-              <button className={styles.outlinedBtn} onClick={() => logout({ returnTo: window.location.origin })}>Logout</button>
+              <button onClick={() => window.location.href = '/api/auth/logout'}>Logout</button>
             </>
           )}
         </div>
