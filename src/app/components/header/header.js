@@ -2,13 +2,17 @@
 import React, { useState } from 'react';
 import styles from '../../styles/header.module.scss';
 import Image from 'next/image';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Header = () => {
-  const [imageError, setImageError] = useState({});
 
-  const handleImageError = (icon) => {
-    setImageError((prev) => ({ ...prev, [icon]: true }));
-  };
+  const { loginWithRedirect, logout, user } = useAuth0();
+
+  // const [imageError, setImageError] = useState({});
+
+  // const handleImageError = (icon) => {
+  //   setImageError((prev) => ({ ...prev, [icon]: true }));
+  // };
 
   const renderSubMenu = (items) => (
     <div className={styles.subMenu}>
@@ -79,8 +83,14 @@ const Header = () => {
           </ul>
         </div>
         <div className={styles.navRight}>
-          <button className={styles.transparentBtn}>Login</button>
-          <button className={styles.outlinedBtn}>Register</button>
+          {!user ? (
+            <button className={styles.transparentBtn} onClick={loginWithRedirect}>Login</button>
+          ) : (
+            <>
+              <span>Welcome, {user.name}!</span>
+              <button className={styles.outlinedBtn} onClick={() => logout({ returnTo: window.location.origin })}>Logout</button>
+            </>
+          )}
         </div>
       </div>
     </nav>
