@@ -14,15 +14,7 @@ const Header = () => {
     <div className={styles.subMenu}>
       {items.map((item, index) => (
         <p key={index} className={styles.subLink}>
-          {!imageError[item.icon] && (
-            <img
-              src={`/images/icon-${item.icon}.svg`}
-              alt={item.icon}
-              width={24}
-              height={24}
-              onError={() => handleImageError(item.icon)}
-            />
-          )}
+          {item.icon && <Image src={`/images/icon-${item.icon}.svg`} alt={item.icon} width={24} height={24} />}
           {item.label}
         </p>
       ))}
@@ -64,16 +56,7 @@ const Header = () => {
             {navItems.map((item, index) => (
               <li key={index}>
                 {item.label}
-                {!imageError[item.icon] && (
-                  <img
-                    src={`/images/icon-${item.icon}.svg`}
-                    className={styles.arrow}
-                    alt={item.icon}
-                    width={24}
-                    height={24}
-                    onError={() => handleImageError(item.icon)}
-                  />
-                )}
+                {item.icon && <Image src={`/images/icon-${item.icon}.svg`} className={styles.arrow} alt={item.icon} width={24} height={24} />}
                 {item.subMenu && renderSubMenu(item.subMenu)}
               </li>
             ))}
