@@ -38,7 +38,7 @@ const Header = () => {
   ];
 
   return (
-    <nav className={styles.nav}>
+    <nav className={`${styles.nav} wrapper-header`}>
       <div className={styles.navContainer}>
         <div className={styles.navLeft}>
           <div className={styles.navLogo}>

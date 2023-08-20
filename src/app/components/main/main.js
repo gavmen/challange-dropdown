@@ -13,7 +13,7 @@ const {
 
 const MainSection = () => {
   return (
-    <main className={mainContainer}>
+    <main className={`${mainContainer} wrapper`}>
       <section className={mainLeft}>
         <h1 className={mainHeading}>
           Make <br />
