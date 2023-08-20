@@ -1,13 +1,29 @@
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import styles from '../../styles/header.module.scss';
 import Image from 'next/image';
 
 const Header = () => {
+  const [imageError, setImageError] = useState({});
+
+  const handleImageError = (icon) => {
+    setImageError((prev) => ({ ...prev, [icon]: true }));
+  };
+
   const renderSubMenu = (items) => (
     <div className={styles.subMenu}>
       {items.map((item, index) => (
         <p key={index} className={styles.subLink}>
-          <Image src={`/images/icon-${item.icon}.svg`} alt={item.icon} width={24} height={24} /> {item.label}
+          {!imageError[item.icon] && (
+            <img
+              src={`/images/icon-${item.icon}.svg`}
+              alt={item.icon}
+              width={24}
+              height={24}
+              onError={() => handleImageError(item.icon)}
+            />
+          )}
+          {item.label}
         </p>
       ))}
     </div>
@@ -48,7 +64,16 @@ const Header = () => {
             {navItems.map((item, index) => (
               <li key={index}>
                 {item.label}
-                {item.icon && <Image src={`/images/icon-${item.icon}.svg`} className={styles.arrow} alt={item.icon} width={24} height={24} />}
+                {!imageError[item.icon] && (
+                  <img
+                    src={`/images/icon-${item.icon}.svg`}
+                    className={styles.arrow}
+                    alt={item.icon}
+                    width={24}
+                    height={24}
+                    onError={() => handleImageError(item.icon)}
+                  />
+                )}
                 {item.subMenu && renderSubMenu(item.subMenu)}
               </li>
             ))}
