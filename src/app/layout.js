@@ -9,9 +9,12 @@ import { Auth0Provider } from '@auth0/auth0-react';
 export default function RootLayout({ children }) {
  return (
     <Auth0Provider
-      domain={process.env.AUTH0_DOMAIN}
-      clientId={process.env.AUTH0_CLIENT_ID}
-      redirectUri="http://localhost:3000/api/callback"
+      domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN}
+      clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID}
+      authorizationParams={{
+        redirect_uri: "http://localhost:3000/api/callback"
+      }}
+      secret={process.env.NEXT_PUBLIC_AUTH0_SECRET}
     >
       <html lang="pt-BR">
         <body>{children}</body>
