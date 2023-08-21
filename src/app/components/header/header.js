@@ -2,23 +2,14 @@
 import React, { useState } from 'react';
 import styles from '../../styles/header.module.scss';
 import Image from 'next/image';
-// import { useAuth0 } from '@auth0/auth0-react';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 const Header = () => {
-
-  // const { loginWithRedirect, logout, user } = useAuth0();
 
   const { user, isLoading, error } = useUser();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
-
-  // const [imageError, setImageError] = useState({});
-
-  // const handleImageError = (icon) => {
-  //   setImageError((prev) => ({ ...prev, [icon]: true }));
-  // };
 
   const renderSubMenu = (items) => (
     <div className={styles.subMenu}>
