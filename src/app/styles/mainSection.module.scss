@@ -71,21 +71,32 @@
 @media screen and (max-width: 800px) {
   .mainContainer {
     flex-direction: column-reverse;
+    height: unset;
+  }
+
+  .mainContent {
+    margin: 2rem 0;
   }
 
   .mainLeft {
     align-items: center;
     text-align: center;
     gap: 2rem;
+
+    & p {
+      margin: 2rem 0 !important;
+    }
   }
 
   .mainHeading {
     font-size: 2.2rem;
+    margin-top: 3rem;
   }
 
   .logoes {
     width: 100%;
     padding-inline: 1rem;
     flex-wrap: wrap;
+    margin: 0rem 0 3rem 0 !important;
   }
 }
